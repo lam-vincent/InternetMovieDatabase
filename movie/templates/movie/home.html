@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link
+      href="{% static 'movie/fontawesome-free-5.15.3-web/css/all.css' %}"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'movie/home.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>InternetMovieDatabase</title>
+  </head>
+  <body>
+    <div class="container">
+      <h3>Liste de films</h3>
+      <h4>Nombre de films : {{count}}</h4>
+
+        <div class="wrapper">
+          {% for movie in movie_list %}
+          <a href="{% url 'movieDetails' id=movie.pk %}">
+          <div class="card">
+            <img
+              src="media/{{movie.photo}}"
+              alt="batmanBegins"
+            />
+            <div class="info">
+              <h4>{{ movie.name }}</h4>
+              <div class="description">              <p>{{movie.description|truncatechars:140}}</p></div>
+
+              <div class="footer">
+                <div class="rating">
+                  <i class="fas fa-star"></i> <span>{{ movie.rating }}</span>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+          </div></a>
+
+          {% endfor %}
+        </div>
+      </a>
+    </div>
+  </body>
+</html>

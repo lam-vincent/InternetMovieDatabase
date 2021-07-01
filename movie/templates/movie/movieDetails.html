@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link
+      href="{% static 'movie/fontawesome-free-5.15.3-web/css/all.css' %}"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>{{details.name}}</title>
+  </head>
+  <body class="bg-blue-100 flex justify-center items-center h-screen">
+    <div class="card bg-white rounded-2xl flex flex-col">
+      <div
+        class="
+          image-background
+          h-48
+          bg-cover bg-center
+          rounded-2xl
+          flex
+          justify-center
+          items-center
+        "
+      >
+        <a href="{% url 'index' %}"
+          ><i
+            class="
+              fas
+              fa-chevron-circle-left
+              text-white text-lg
+              absolute
+              top-4
+              left-4
+            "
+          ></i
+        ></a>
+        <i class="fas fa-play-circle text-white text-3xl"></i>
+      </div>
+      <div class="info transform -translate-y-6 bg-white flex-grow rounded-2xl">
+        <div class="header mr-8">
+          <div
+            class="
+              poster
+              w-28
+              h-40
+              bg-cover bg-center
+              rounded-lg
+              absolute
+              -top-8
+              left-4
+              shadow-xl
+            "
+          ></div>
+          <div class="title-wrapper ml-36 h-28">
+            <h1 class="font-bold mt-2 text-lg text-gray-800">
+              {{details.name}}
+            </h1>
+            <div class="rating text-sm">
+              <i class="fas fa-star text-yellow-400"></i>
+              <span>{{details.rating}}</span>
+            </div>
+            <span class="block text-sm text-gray-400"
+              >Action & adventure, Comedy</span
+            >
+            <span class="block text-sm text-gray-400">1h41min</span>
+          </div>
+        </div>
+        <div class="navigation flex pt-4 justify-around text-gray-400">
+          <h4 class="text-gray-800 font-medium">About Movie</h4>
+          <h4>Review</h4>
+        </div>
+        <div class="description mx-5">
+          <h1 class="font-bold my-4">Synopsis</h1>
+          <p class="">{{details.description}}</p>
+        </div>
+        <div
+          class="
+            add-to-list-button
+            left-5
+            right-5
+            bottom-4
+            h-14
+            bg-yellow-400
+            rounded-xl
+            absolute
+            shadow-xl
+            flex
+            justify-center
+            items-center
+          "
+        >
+          <span class="font-bold text-white">Add To List</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .image-background {
+    background-image: url("{{MEDIA_ROOT}}/media/{{details.photo}}");
+    filter: brightness(75%);
+  }
+
+  .poster {
+    background-image: url("{{MEDIA_ROOT}}/media/{{details.photo}}");
+  }
+
+  .card {
+    width: 24rem;
+    height: 46rem;
+  }
+</style>
