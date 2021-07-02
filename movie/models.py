@@ -1,3 +1,4 @@
+from django.db.models.fields import DurationField, IntegerField
 from InternetMovieDatabase.settings import DEFAULT_AUTO_FIELD
 from django.db import models
 
@@ -16,13 +17,22 @@ class Person(models.Model):
         return self.name
 
 
+class Categories(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
 class Movie(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=50)
     date = models.DateField()
     description = models.CharField(max_length=1000)
     rating = models.IntegerField()
     photo = models.ImageField(
         upload_to='movie', default='defaultImg.png')
+    categories = models.ManyToManyField(Categories, blank=True)
+    duration = IntegerField(default=0)
 
     def __str__(self):
         return self.name
