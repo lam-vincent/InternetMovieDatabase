@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Person, Movie
+from .forms import MovieForm
+from django.shortcuts import redirect
+from .utils import *
 
 
 def index(request):
@@ -24,4 +27,24 @@ def movieDetails(request, id):
     details = Movie.objects.get(pk=id)
     contexte = {}
     contexte['details'] = details
+    contexte['categories'] = afficherCategories(details.categories.all())
+    contexte['duration'] = conversionHeureMinute(details.duration)
     return render(request, "movie/movieDetails.html", contexte)
+
+
+def addMovie(request):
+    if request.method == 'POST':
+        form = MovieForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(home)
+    else:
+        form = MovieForm()
+
+    return render(request, 'movie/addMovie.html', {'form': form})
+
+
+def removeMovie(request, id):
+    m = Movie.objects.get(pk=id)
+    m.delete()
+    return redirect(home)

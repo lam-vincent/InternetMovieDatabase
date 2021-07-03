@@ -7,7 +7,9 @@ from django.conf import settings
 urlpatterns = [
     path('profil', views.index, name="profil"),
     path('', views.home, name="index"),
-    path('movieDetails/<int:id>/', views.movieDetails, name="movieDetails"),
+    path('moviedetails/<int:id>/', views.movieDetails, name="movieDetails"),
+    path('addmovie', views.addMovie, name="addMovie"),
+    path('removemovie/<int:id>/', views.removeMovie, name="removeMovie"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

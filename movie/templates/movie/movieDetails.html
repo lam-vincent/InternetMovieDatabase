@@ -47,6 +47,11 @@
           ></i
         ></a>
         <i class="fas fa-play-circle text-white text-3xl"></i>
+        <a href="{% url 'removeMovie' id=details.pk %}">
+          <i
+            class="fas fa-trash-alt text-white text-lg absolute top-4 right-4"
+          ></i
+        ></a>
       </div>
       <div class="info transform -translate-y-6 bg-white flex-grow rounded-2xl">
         <div class="header mr-8">
@@ -71,10 +76,8 @@
               <i class="fas fa-star text-yellow-400"></i>
               <span>{{details.rating}}</span>
             </div>
-            <span class="block text-sm text-gray-400"
-              >Action & adventure, Comedy</span
-            >
-            <span class="block text-sm text-gray-400">1h41min</span>
+            <span class="block text-sm text-gray-400">{{categories}}</span>
+            <span class="block text-sm text-gray-400">{{duration}}</span>
           </div>
         </div>
         <div class="navigation flex pt-4 justify-around text-gray-400">
