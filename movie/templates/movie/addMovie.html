@@ -11,5 +11,8 @@
       {% csrf_token %} {{ form }}
       <input type="submit" value="Submit" />
     </form>
+    <form action="{% url 'index' %}">
+      <input type="submit" value="Back to home page" />
+    </form>
   </body>
 </html>
