@@ -1,5 +1,6 @@
+from django.db.models.fields.related import ForeignKey
 from django.shortcuts import render
-from .models import Person, Movie
+from .models import Comment, Person, Movie
 from .forms import MovieForm
 from django.shortcuts import redirect
 from .utils import *
@@ -29,6 +30,7 @@ def movieDetails(request, id):
     contexte['details'] = details
     contexte['categories'] = afficherCategories(details.categories.all())
     contexte['duration'] = conversionHeureMinute(details.duration)
+    contexte['comments'] = Comment.objects.filter(movie=id)
     return render(request, "movie/movieDetails.html", contexte)
 
 
