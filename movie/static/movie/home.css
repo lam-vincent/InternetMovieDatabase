@@ -92,3 +92,7 @@ span {
 .fa-chevron-right {
   color: #4b5563;
 }
+
+h4 {
+  display: inline;
+}

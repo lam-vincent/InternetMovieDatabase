@@ -1,4 +1,3 @@
-
 def conversionHeureMinute(duree_minute):
     heure = duree_minute//60
     minute = duree_minute % 60

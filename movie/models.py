@@ -1,4 +1,4 @@
-from django.db.models.fields import DurationField, IntegerField
+from django.db.models.fields import DurationField, IntegerField, URLField
 from InternetMovieDatabase.settings import DEFAULT_AUTO_FIELD
 from django.db import models
 
@@ -33,6 +33,7 @@ class Movie(models.Model):
         upload_to='movie', default='defaultImg.png')
     categories = models.ManyToManyField(Categories, blank=True)
     duration = IntegerField(default=0)
+    trailer = URLField(max_length=300, blank=True)
 
     def __str__(self):
         return self.name
