@@ -110,6 +110,12 @@
         </div>
       </div>
     </div>
+    <div class="comments">
+      {% for comment in comments %}
+      <h4>{{comment.title}}</h4>
+      <p>{{comment.message}}</p>
+      {% endfor %}
+    </div>
   </body>
 </html>
 
