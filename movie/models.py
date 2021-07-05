@@ -1,4 +1,5 @@
-from django.db.models.fields import DurationField, IntegerField, URLField
+from django.db.models.deletion import CASCADE
+from django.db.models.fields import IntegerField, URLField
 from InternetMovieDatabase.settings import DEFAULT_AUTO_FIELD
 from django.db import models
 
@@ -37,3 +38,14 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    title = models.CharField(max_length=50)
+    date = models.DateTimeField()
+    message = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.title + " - " + self.movie.name
