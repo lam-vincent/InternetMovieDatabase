@@ -20,6 +20,28 @@
       rel="stylesheet"
     />
     <title>{{details.name}}</title>
+    <script>
+      function displayReview() {
+        var description = document.getElementsByClassName("description");
+        description[0].style.display = "none";
+        var comments = document.getElementsByClassName("comments");
+        comments[0].style.display = "block";
+        var review = document.getElementsByClassName("review");
+        review[0].classList.add("text-gray-800", "font-medium");
+        var synopsis = document.getElementsByClassName("synopsis");
+        synopsis[0].classList.remove("text-gray-800", "font-medium");
+      }
+      function displaySynopsis() {
+        var comments = document.getElementsByClassName("comments");
+        comments[0].style.display = "none";
+        var description = document.getElementsByClassName("description");
+        description[0].style.display = "block";
+        var review = document.getElementsByClassName("review");
+        review[0].classList.remove("text-gray-800", "font-medium");
+        var synopsis = document.getElementsByClassName("synopsis");
+        synopsis[0].classList.add("text-gray-800", "font-medium");
+      }
+    </script>
   </head>
   <body class="bg-blue-100 flex justify-center items-center h-screen">
     <div class="card bg-white rounded-2xl flex flex-col">
@@ -83,12 +105,23 @@
           </div>
         </div>
         <div class="navigation flex pt-4 justify-around text-gray-400">
-          <h4 class="text-gray-800 font-medium">About Movie</h4>
-          <h4>Review</h4>
+          <h4
+            class="synopsis text-gray-800 font-medium"
+            onclick="displaySynopsis()"
+          >
+            About Movie
+          </h4>
+          <h4 class="review" onclick="displayReview()">Review</h4>
         </div>
         <div class="description mx-5">
           <h1 class="font-bold my-4">Synopsis</h1>
           <p class="">{{details.description}}</p>
+        </div>
+        <div class="comments mx-5 hidden">
+          {% for comment in comments %}
+          <h4 class="font-bold">{{comment.title}}</h4>
+          <p>{{comment.message}}</p>
+          {% endfor %}
         </div>
         <div
           class="
@@ -109,12 +142,6 @@
           <span class="font-bold text-white">Add To List</span>
         </div>
       </div>
-    </div>
-    <div class="comments">
-      {% for comment in comments %}
-      <h4>{{comment.title}}</h4>
-      <p>{{comment.message}}</p>
-      {% endfor %}
     </div>
   </body>
 </html>
