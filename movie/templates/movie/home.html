@@ -17,8 +17,12 @@
 
 <body>
   <div class="container">
-    <span>{{ username }}</span>
-    <a href="{% url 'logout' %}"> <span>se déconnecter</span></a>
+    {% if username %}
+      <span>{{ username }}</span>
+      <a href="{% url 'logout' %}"> <span>se déconnecter</span></a>
+    {% else %}
+      <a href="{% url 'login' %}"> <span>se connecter</span></a>
+    {% endif %}
     <h3>Liste de films</h3>
     <div class="header">
       <h4>Nombre de films : {{count}}</h4>
