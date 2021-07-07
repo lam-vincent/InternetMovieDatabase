@@ -1,7 +1,7 @@
-from django.db.models.deletion import CASCADE
 from django.db.models.fields import IntegerField, URLField
 from InternetMovieDatabase.settings import DEFAULT_AUTO_FIELD
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Person(models.Model):

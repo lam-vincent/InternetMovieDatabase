@@ -1,9 +1,9 @@
-from django.db.models.fields.related import ForeignKey
 from django.shortcuts import render
 from .models import Comment, Person, Movie
 from .forms import MovieForm
 from django.shortcuts import redirect
 from .utils import *
+from django.contrib.auth import authenticate, login as auth_login, logout
 
 
 def index(request):
@@ -17,9 +17,13 @@ def index(request):
 def home(request):
     count = Movie.objects.count()
     movie_list = Movie.objects.all()
+    username = None
+    if request.user.is_authenticated:
+        username = request.user.username
     contexte = {}
     contexte['movie_list'] = movie_list
     contexte['count'] = count
+    contexte['username'] = username
     print(Movie.objects.get(pk=2).photo)
     return render(request, "movie/home.html", contexte)
 
@@ -49,4 +53,20 @@ def addMovie(request):
 def removeMovie(request, id):
     m = Movie.objects.get(pk=id)
     m.delete()
+    return redirect(home)
+
+
+def loginView(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect(home)
+    return render(request, "movie/login.html")
+
+
+def logout_view(request):
+    logout(request)
     return redirect(home)

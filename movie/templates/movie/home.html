@@ -17,6 +17,8 @@
 
 <body>
   <div class="container">
+    <span>{{ username }}</span>
+    <a href="{% url 'logout' %}"> <span>se déconnecter</span></a>
     <h3>Liste de films</h3>
     <div class="header">
       <h4>Nombre de films : {{count}}</h4>
