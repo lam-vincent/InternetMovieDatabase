@@ -49,3 +49,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.title + " - " + self.movie.name
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    favoriteMovies = models.ManyToManyField(Movie, blank=True)
+
+    def __str__(self):
+        return self.user.username
