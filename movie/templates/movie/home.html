@@ -24,6 +24,16 @@
       <a href="{% url 'login' %}"> <span>se connecter</span></a>
     {% endif %}
     <h3>Liste de films</h3> 
+    {% if is_authenticated %}
+      <form method="post">
+        {% csrf_token %}
+        <input type="submit" name="All" value="All">
+      </form>
+      <form method="post">
+        {% csrf_token %}
+        <input type="submit" name="Favorite" value="Favorite">
+      </form>
+    {% endif %}
     <div class="header">
       <h4>Nombre de films : {{count}}</h4>
       <a href="{% url 'addMovie' %}">      <span class="add-btn">Add Movie</span></a>

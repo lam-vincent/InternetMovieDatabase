@@ -20,8 +20,16 @@ def home(request):
     username = None
     if request.user.is_authenticated:
         username = request.user.username
+        userProfileConnected = UserProfile.objects.get(pk=request.user.id)
+        favoriteMoviesList = userProfileConnected.favoriteMovies.all()
     contexte = {}
+    contexte['is_authenticated'] = request.user.is_authenticated
     contexte['movie_list'] = movie_list
+    if request.method == 'POST':
+        if request.POST.get("Favorite", "") == "Favorite":
+            contexte['movie_list'] = favoriteMoviesList
+        if request.POST.get("All", "") == "All":
+            contexte['movie_list'] = movie_list
     contexte['count'] = count
     contexte['username'] = username
     print(Movie.objects.get(pk=2).photo)
@@ -36,9 +44,10 @@ def movieDetails(request, id):
     contexte['duration'] = conversionHeureMinute(details.duration)
     contexte['comments'] = Comment.objects.filter(movie=id)
     contexte['is_authenticated'] = request.user.is_authenticated
-    userProfileConnected = UserProfile.objects.get(pk=request.user.id)
-    if request.method == 'POST':
-        userProfileConnected.favoriteMovies.add(details)
+    if request.user.is_authenticated:
+        userProfileConnected = UserProfile.objects.get(pk=request.user.id)
+        if request.method == 'POST':
+            userProfileConnected.favoriteMovies.add(details)
     return render(request, "movie/movieDetails.html", contexte)
 
 
