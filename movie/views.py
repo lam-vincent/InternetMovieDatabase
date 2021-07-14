@@ -35,6 +35,10 @@ def movieDetails(request, id):
     contexte['categories'] = afficherCategories(details.categories.all())
     contexte['duration'] = conversionHeureMinute(details.duration)
     contexte['comments'] = Comment.objects.filter(movie=id)
+    contexte['is_authenticated'] = request.user.is_authenticated
+    userProfileConnected = UserProfile.objects.get(pk=request.user.id)
+    if request.method == 'POST':
+        userProfileConnected.favoriteMovies.add(details)
     return render(request, "movie/movieDetails.html", contexte)
 
 

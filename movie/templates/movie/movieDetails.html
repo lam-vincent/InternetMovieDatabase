@@ -123,6 +123,31 @@
           <p>{{comment.message}}</p>
           {% endfor %}
         </div>
+        {% if is_authenticated %}
+        <form method="post">
+          {% csrf_token %}
+          <button
+            type="submit"
+            class="
+              add-to-list-button
+              left-5
+              right-5
+              bottom-4
+              h-14
+              bg-yellow-400
+              rounded-xl
+              absolute
+              shadow-xl
+              flex
+              justify-center
+              items-center
+            "
+          >
+            <span class="font-bold text-white">Add To List</span>
+          </button>
+        </form>
+
+        {% else %}
         <div
           class="
             add-to-list-button
@@ -130,10 +155,9 @@
             right-5
             bottom-4
             h-14
-            bg-yellow-400
+            bg-gray-400
             rounded-xl
             absolute
-            shadow-xl
             flex
             justify-center
             items-center
@@ -141,6 +165,7 @@
         >
           <span class="font-bold text-white">Add To List</span>
         </div>
+        {% endif %}
       </div>
     </div>
   </body>
@@ -159,5 +184,9 @@
   .card {
     width: 24rem;
     height: 46rem;
+  }
+
+  .add-to-list-button {
+    width: 345px;
   }
 </style>
